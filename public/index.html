@@ -1,75 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-
-    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js"></script>
-
-    <!-- Add additional SDKs that you want to use -->
-    <script src="https://www.gstatic.com/firebasejs/9.17.2/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.17.2/firebase-firestore.js"></script>
-    <!-- ... -->
-
-    <script src="app.js"></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
 </head>
 <body>
-    
-    <section id="whenSignedOut">
-
-      <h1>Welcome</h1>
-      <p>Please log in with your Google account to continue.</p>
-
-      <button id="signInBtn">Sign in with Google</button>
-      
-    </section>
-
-    <section id="whenSignedIn" hidden="true">
-
-      <div id="userDetails"></div>
-
-      <button id="signOutBtn">Sign Out</button>
-
-    </section>
+  <p>Hello</p>
   
-    
-
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <script type="module">
-  // Import the functions you need from the SDKs you need
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-app.js";
-  import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.17.2/firebase-analytics.js";
-  // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
-
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyBDEUVPJjFC6-Q_HQvNyH9uvxCpYoSTBsM",
-    authDomain: "xhs-house-app.firebaseapp.com",
-    projectId: "xhs-house-app",
-    storageBucket: "xhs-house-app.appspot.com",
-    messagingSenderId: "776582590026",
-    appId: "1:776582590026:web:77e7177429c171e345c0b3",
-    measurementId: "G-K2X4P92BB9"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-</script>
+  
+  <!-- scripts -->
+  <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
