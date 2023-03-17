@@ -39,12 +39,21 @@ auth.onAuthStateChanged(user => {
         whenSignedOut.hidden = true;
         userDetails.innerHTML = `<h3>Hi, ${user.displayName}!</h3> <p>User ID: ${user.uid}</p>`;
 
-        var houseColor = red;
+        console.log(flexContainer);
 
-        switch (houseColor) {
-            case red:
-                flexContainer.style.backgroundColor = "#000"
+        //flexContainer.style.backgroundColor = "#E74C3C"
+
+        var house = "Raphael"
+
+        switch (house) {
+            case "Raphael":
+                flexContainer.style.background = "#E74C3C";
+                break;
+            case "Leonardo":
+                flexContainer.style.background = "#6495ED";
+                break;
         }
+
     } else {
         //not signed in
         whenSignedIn.hidden = true;
