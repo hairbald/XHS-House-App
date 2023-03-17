@@ -23,6 +23,8 @@ const signOutBtn = document.getElementById('signOutBtn');
 
 const userDetails = document.getElementById('userDetails');
 
+const flexContainer = document.getElementById('flexContainer');
+
 const provider = new firebase.auth.GoogleAuthProvider();
 
 signInBtn.onclick = () => auth.signInWithPopup(provider);
@@ -36,6 +38,13 @@ auth.onAuthStateChanged(user => {
         whenSignedIn.hidden = false;
         whenSignedOut.hidden = true;
         userDetails.innerHTML = `<h3>Hello, ${user.displayName}!</h3> <p>User ID: ${user.uid}</p>`;
+
+        var houseColor = red;
+
+        switch (houseColor) {
+            case red:
+                flexContainer.style.backgroundColor = "#000"
+        }
     } else {
         //not signed in
         whenSignedIn.hidden = true;
