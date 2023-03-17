@@ -24,6 +24,7 @@ const signOutBtn = document.getElementById('signOutBtn');
 const userDetails = document.getElementById('userDetails');
 
 const flexContainer = document.getElementById('flexContainer');
+const houseLeaderboard = document.getElementById('houseLeaderboard');
 
 const provider = new firebase.auth.GoogleAuthProvider();
 
@@ -43,14 +44,22 @@ auth.onAuthStateChanged(user => {
 
         //flexContainer.style.backgroundColor = "#E74C3C"
 
-        var house = "Raphael"
+        var house = "Leonardo"
 
         switch (house) {
             case "Raphael":
                 flexContainer.style.background = "#E74C3C";
+                houseLeaderboard.style.border = "5px solid red";
                 break;
             case "Leonardo":
                 flexContainer.style.background = "#6495ED";
+                houseLeaderboard.style.border = "5px solid blue";
+                break;
+            case "Purple":
+                flexContainer.style.background = "#";
+                break;
+            case "Orange":
+                flexContainer.style.background = "#";
                 break;
         }
 
