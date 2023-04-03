@@ -11,9 +11,10 @@ const firebaseConfig = {
   
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
-  
+  //firebase.analytics();
 
 const auth = firebase.auth();
+const db = firebase.firestore();
 
 const whenSignedIn = document.getElementById('whenSignedIn');
 const whenSignedOut = document.getElementById('whenSignedOut');
@@ -40,19 +41,31 @@ auth.onAuthStateChanged(user => {
         whenSignedOut.hidden = true;
         userDetails.innerHTML = `<h3>Hi, ${user.displayName}!</h3> <p>User ID: ${user.uid}</p>`;
 
-        console.log(flexContainer);
+    //console.log(flexContainer);
 
-        //flexContainer.style.backgroundColor = "#E74C3C"
+        const userRef = db.collection("users").doc(user.uid + "h");
+        
+        userRef.set({
+            house: "Blue",
+            name: "Frederick Frederickson",
+            points: 80
+        })
+        .then(() => {
+            console.log("New user created successfully!");
+        })
+        .catch((error) => {
+            console.error("Error creating new user: ", error);
+        });
 
-        var house = "Leonardo"
+        var house = "Red"
 
         switch (house) {
-            case "Raphael":
-                flexContainer.style.background = "#E74C3C";
+            case "Red":
+                //flexContainer.style.background = "#E74C3C";
                 houseLeaderboard.style.border = "5px solid red";
                 break;
-            case "Leonardo":
-                flexContainer.style.background = "#6495ED";
+            case "Blue":
+                //flexContainer.style.background = "#6495ED";
                 houseLeaderboard.style.border = "5px solid blue";
                 break;
             case "Purple":
