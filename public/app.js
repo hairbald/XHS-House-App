@@ -43,11 +43,11 @@ auth.onAuthStateChanged(user => {
 
     //console.log(flexContainer);
 
-        const userRef = db.collection("users").doc(user.uid + "h");
+        const userRef = db.collection("users").doc(user.uid);
         
         userRef.set({
-            house: "Blue",
-            name: "Frederick Frederickson",
+            house: "Red",
+            name: user.displayName,
             points: 80
         })
         .then(() => {
