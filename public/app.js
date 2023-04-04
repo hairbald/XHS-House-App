@@ -11,10 +11,11 @@ const firebaseConfig = {
   
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
-  //firebase.analytics();
 
 const auth = firebase.auth();
 const db = firebase.firestore();
+
+let unsubscribe;
 
 const whenSignedIn = document.getElementById('whenSignedIn');
 const whenSignedOut = document.getElementById('whenSignedOut');
@@ -36,6 +37,9 @@ signOutBtn.onclick = () => auth.signOut();
 
 auth.onAuthStateChanged(user => {
     if (user) {
+        //user variables
+        var house = "";
+
         //signed in
         whenSignedIn.hidden = false;
         whenSignedOut.hidden = true;
@@ -57,24 +61,40 @@ auth.onAuthStateChanged(user => {
             console.error("Error creating new user: ", error);
         });
 
-        var house = "Red"
+        //Display user info in userInfo <ul>
+        unsubscribe = userRef.onSnapshot((doc) => {
+            var data = doc.data();
+            userInfo.innerHTML = `
+                <li>House: ${data.house}</li>
+                <li>Name: ${data.name}</li>
+                <li>Points: ${data.points}</li>
+                `; 
+                house = data.house;
 
-        switch (house) {
-            case "Red":
-                //flexContainer.style.background = "#E74C3C";
-                houseLeaderboard.style.border = "5px solid red";
-                break;
-            case "Blue":
-                //flexContainer.style.background = "#6495ED";
-                houseLeaderboard.style.border = "5px solid blue";
-                break;
-            case "Purple":
-                flexContainer.style.background = "#";
-                break;
-            case "Orange":
-                flexContainer.style.background = "#";
-                break;
-        }
+                switch (house) {
+                    case "Red":
+                        //flexContainer.style.background = "#E74C3C";
+                        houseLeaderboard.style.border = "5px solid red";
+                        break;
+                    case "Blue":
+                        //flexContainer.style.background = "#6495ED";
+                        houseLeaderboard.style.border = "5px solid blue";
+                        break;
+                    case "Purple":
+                        flexContainer.style.background = "#";
+                        break;
+                    case "Orange":
+                        flexContainer.style.background = "#";
+                        break;
+                }
+        });
+
+        console.log(house);
+
+        //var house = data.house;
+        //var house = "Red"
+
+        
 
     } else {
         //not signed in
