@@ -22,6 +22,7 @@ const whenSignedOut = document.getElementById('whenSignedOut');
 
 const signInBtn = document.getElementById('signInBtn');
 const signOutBtn = document.getElementById('signOutBtn');
+const addPointsBtn = document.getElementById('addPointsBtn');
 
 const userDetails = document.getElementById('userDetails');
 
@@ -60,6 +61,17 @@ auth.onAuthStateChanged(user => {
         .catch((error) => {
             console.error("Error creating new user: ", error);
         });
+
+        addPointsBtn.onclick = () => 
+            userRef.update({
+                points: firebase.firestore.FieldValue.increment(10)
+            })
+            .then(() => {
+                console.log("Points updated successfully!");
+            })
+            .catch((error) => {
+                console.error("Error updating points: ", error);
+            });
 
         //Display user info in userInfo <ul>
         unsubscribe = userRef.onSnapshot((doc) => {
