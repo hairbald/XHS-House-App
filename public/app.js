@@ -86,32 +86,28 @@ auth.onAuthStateChanged(user => {
             homeNavbar.innerHTML = `
                 <img id="userPhoto" src="${user.photoURL}" alt="Profile Photo" width="48" height="48">
                 <h3>Hi, ${user.displayName}!</h3>
-                <p>Points: ${data.points}</p>
+                <h3>Points: ${data.points}</h3>
+                <h3><a href="index.html">Home</a></h3>
+                <h3><a href="submit.html">Redeem Points</a></h3>
                 `;
 
-
-                const userPointsSpan = document.getElementById('userPoints');
-                unsubscribe = userRef.onSnapshot((doc) => {
-                    const data = doc.data();
-                    userPointsSpan.textContent = data.points;
-                })
 
             house = data.house;
 
                 switch (house) {
                     case "Red":
                         //flexContainer.style.background = "#E74C3C";
-                        houseLeaderboard.style.border = "5px solid red";
+                        houseLeaderboard.style.border = "5px solid #C0392B";
                         break;
                     case "Blue":
                         //flexContainer.style.background = "#6495ED";
-                        houseLeaderboard.style.border = "5px solid blue";
+                        houseLeaderboard.style.border = "5px solid #2980B9";
                         break;
                     case "Purple":
-                        flexContainer.style.background = "#";
+                        flexContainer.style.background = "5px solid #8E44AD";
                         break;
                     case "Orange":
-                        flexContainer.style.background = "#";
+                        flexContainer.style.background = "5px solid #D35400";
                         break;
                 }
         });

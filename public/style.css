@@ -22,7 +22,7 @@ body
 .navbar {
     display:flex;
     justify-content: left;
-    flex: 1;
+    gap: 10px;
 }
 
 .navbarBtn {
