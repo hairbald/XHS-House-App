@@ -19,9 +19,21 @@ body
     border: 5px solid black;
 }
 
+.navbar {
+    display:flex;
+    justify-content: left;
+    flex: 1;
+}
+
+.navbarBtn {
+    background-color: #fff;
+    border: black 2px;
+}
+
 button {
     background-color: #0275d8;
     border: none;
+    border-radius: 4px;
     text-align: center;
     cursor: pointer;
     font-size: 16px;

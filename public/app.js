@@ -26,6 +26,7 @@ const addPointsBtn = document.getElementById('addPointsBtn');
 
 const userDetails = document.getElementById('userDetails');
 
+const homeNavbar = document.getElementById('homeNavbar');
 const flexContainer = document.getElementById('flexContainer');
 const houseLeaderboard = document.getElementById('houseLeaderboard');
 
@@ -46,7 +47,7 @@ auth.onAuthStateChanged(user => {
         whenSignedOut.hidden = true;
         userDetails.innerHTML = `<h3>Hi, ${user.displayName}!</h3> <p>User ID: ${user.uid}</p>`;
 
-    //console.log(flexContainer);
+        
 
         const userRef = db.collection("users").doc(user.uid);
         
@@ -81,7 +82,21 @@ auth.onAuthStateChanged(user => {
                 <li>Name: ${data.name}</li>
                 <li>Points: ${data.points}</li>
                 `; 
-                house = data.house;
+
+            homeNavbar.innerHTML = `
+                <img id="userPhoto" src="${user.photoURL}" alt="Profile Photo" width="48" height="48">
+                <h3>Hi, ${user.displayName}!</h3>
+                <p>Points: ${data.points}</p>
+                `;
+
+
+                const userPointsSpan = document.getElementById('userPoints');
+                unsubscribe = userRef.onSnapshot((doc) => {
+                    const data = doc.data();
+                    userPointsSpan.textContent = data.points;
+                })
+
+            house = data.house;
 
                 switch (house) {
                     case "Red":
@@ -100,13 +115,7 @@ auth.onAuthStateChanged(user => {
                         break;
                 }
         });
-
-        console.log(house);
-
-        //var house = data.house;
-        //var house = "Red"
-
-        
+    
 
     } else {
         //not signed in
