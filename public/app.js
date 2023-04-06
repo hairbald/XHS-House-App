@@ -36,11 +36,12 @@ signInBtn.onclick = () => auth.signInWithPopup(provider);
 
 signOutBtn.onclick = () => auth.signOut();
 
+let house = "unknown";
 
 auth.onAuthStateChanged(user => {
     if (user) {
         //user variables
-        var house = "";
+        //var house = "";
 
         //signed in
         whenSignedIn.hidden = false;
@@ -54,13 +55,23 @@ auth.onAuthStateChanged(user => {
         userRef.get().then(doc => {
             if (doc.exists) {
                 console.log("User already exists:", doc.data());
+                house = doc.data().house;
 
             } else {
-                //set initial values
-                userRef.set({
-                    house: "Red",
-                    name: user.displayName,
-                    points: 80
+                //Lookup student
+                db.collection("students").where("name", "==", user.displayName).get()
+                .then(querySnapshot => {
+                    if (!querySnapshot.empty) {
+                        //Get the student's house
+                        house = querySnapshot.docs[0].data().house;
+
+                        //set initial values
+                        userRef.set({
+                            house: house,
+                            name: user.displayName,
+                            points: 80
+                        })
+                    }
                 })
                 .then(() => {
                     console.log("New user created successfully!");
