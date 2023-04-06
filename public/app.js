@@ -45,23 +45,31 @@ auth.onAuthStateChanged(user => {
         //signed in
         whenSignedIn.hidden = false;
         whenSignedOut.hidden = true;
-        userDetails.innerHTML = `<h3>Hi, ${user.displayName}!</h3> <p>User ID: ${user.uid}</p>`;
+        //userDetails.innerHTML = `<h3>Hi, ${user.displayName}!</h3> <p>User ID: ${user.uid}</p>`;
 
         
 
         const userRef = db.collection("users").doc(user.uid);
         
-        userRef.set({
-            house: "Red",
-            name: user.displayName,
-            points: 80
+        userRef.get().then(doc => {
+            if (doc.exists) {
+                console.log("User already exists:", doc.data());
+
+            } else {
+                //set initial values
+                userRef.set({
+                    house: "Red",
+                    name: user.displayName,
+                    points: 80
+                })
+                .then(() => {
+                    console.log("New user created successfully!");
+                })
+                .catch((error) => {
+                    console.error("Error creating new user: ", error);
+                });
+            }
         })
-        .then(() => {
-            console.log("New user created successfully!");
-        })
-        .catch((error) => {
-            console.error("Error creating new user: ", error);
-        });
 
         addPointsBtn.onclick = () => 
             userRef.update({
@@ -77,6 +85,7 @@ auth.onAuthStateChanged(user => {
         //Display user info in userInfo <ul>
         unsubscribe = userRef.onSnapshot((doc) => {
             var data = doc.data();
+
             userInfo.innerHTML = `
                 <li>House: ${data.house}</li>
                 <li>Name: ${data.name}</li>
@@ -96,18 +105,20 @@ auth.onAuthStateChanged(user => {
 
                 switch (house) {
                     case "Red":
-                        //flexContainer.style.background = "#E74C3C";
+                        flexContainer.style.border = "5px solid #C0392B";
                         houseLeaderboard.style.border = "5px solid #C0392B";
                         break;
                     case "Blue":
-                        //flexContainer.style.background = "#6495ED";
+                        flexContainer.style.border = "5px solid #2980B9";
                         houseLeaderboard.style.border = "5px solid #2980B9";
                         break;
                     case "Purple":
-                        flexContainer.style.background = "5px solid #8E44AD";
+                        flexContainer.style.border = "5px solid #8E44AD";
+                        houseLeaderboard.style.border = "5px solid #8E44AD";
                         break;
                     case "Orange":
-                        flexContainer.style.background = "5px solid #D35400";
+                        flexContainer.style.border = "5px solid #D35400";
+                        houseLeaderboard.style.border = "5px solid #D35400";
                         break;
                 }
         });
