@@ -26,7 +26,7 @@ const addPointsBtn = document.getElementById('addPointsBtn');
 
 const userDetails = document.getElementById('userDetails');
 
-const homeNavbar = document.getElementById('homeNavbar');
+const navbar = document.getElementById('navbar');
 const flexContainer = document.getElementById('flexContainer');
 const houseLeaderboard = document.getElementById('houseLeaderboard');
 
@@ -103,7 +103,7 @@ auth.onAuthStateChanged(user => {
                 <li>Points: ${data.points}</li>
                 `; 
 
-            homeNavbar.innerHTML = `
+            navbar.innerHTML = `
                 <img id="userPhoto" src="${user.photoURL}" alt="Profile Photo" width="48" height="48">
                 <h3>Hi, ${user.displayName}!</h3>
                 <h3>Points: ${data.points}</h3>
