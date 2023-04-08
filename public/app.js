@@ -116,20 +116,16 @@ auth.onAuthStateChanged(user => {
 
                 switch (house) {
                     case "Red":
-                        flexContainer.style.border = "5px solid #C0392B";
-                        houseLeaderboard.style.border = "5px solid #C0392B";
+                        setColor("5px solid #C0392B");
                         break;
                     case "Blue":
-                        flexContainer.style.border = "5px solid #2980B9";
-                        houseLeaderboard.style.border = "5px solid #2980B9";
+                        setColor("5px solid #2980B9");
                         break;
                     case "Purple":
-                        flexContainer.style.border = "5px solid #8E44AD";
-                        houseLeaderboard.style.border = "5px solid #8E44AD";
+                        setColor("5px solid #8E44AD");
                         break;
                     case "Orange":
-                        flexContainer.style.border = "5px solid #D35400";
-                        houseLeaderboard.style.border = "5px solid #D35400";
+                        setColor("5px solid #D35400");
                         break;
                 }
         });
@@ -142,3 +138,8 @@ auth.onAuthStateChanged(user => {
         userDetails.innerHTML = '';
     }
 });
+
+function setColor(color) {
+    flexContainer.style.border = color;
+    houseLeaderboard.style.border = color;
+}
