@@ -117,15 +117,19 @@ auth.onAuthStateChanged(user => {
                 switch (house) {
                     case "Red":
                         setColor("5px solid #C0392B");
+                        navbar.style.backgroundColor = "#E74C3C";
                         break;
                     case "Blue":
                         setColor("5px solid #2980B9");
+                        navbar.style.backgroundColor = "#3498DB";
                         break;
                     case "Purple":
                         setColor("5px solid #8E44AD");
+                        navbar.style.backgroundColor = "#9B59B6";
                         break;
                     case "Orange":
-                        setColor("5px solid #D35400");
+                        setColor("5px solid #E67E22");
+                        navbar.style.backgroundColor = "#F39C12";
                         break;
                 }
         });
