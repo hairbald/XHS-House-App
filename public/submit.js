@@ -1,16 +1,16 @@
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyBDEUVPJjFC6-Q_HQvNyH9uvxCpYoSTBsM",
-    authDomain: "xhs-house-app.firebaseapp.com",
-    projectId: "xhs-house-app",
-    storageBucket: "xhs-house-app.appspot.com",
-    messagingSenderId: "776582590026",
-    appId: "1:776582590026:web:77e7177429c171e345c0b3",
-    measurementId: "G-K2X4P92BB9"
-  };
-  
-  // Initialize Firebase
-  firebase.initializeApp(firebaseConfig);
+  apiKey: "AIzaSyBDEUVPJjFC6-Q_HQvNyH9uvxCpYoSTBsM",
+  authDomain: "xhs-house-app.firebaseapp.com",
+  projectId: "xhs-house-app",
+  storageBucket: "xhs-house-app.appspot.com",
+  messagingSenderId: "776582590026",
+  appId: "1:776582590026:web:77e7177429c171e345c0b3",
+  measurementId: "G-K2X4P92BB9"
+};
+
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
 
 const auth = firebase.auth();
 const db = firebase.firestore();
@@ -40,7 +40,7 @@ auth.onAuthStateChanged(user => {
         <h3>Points: ${data.points}</h3>
         <h3><a href="index.html">Home</a></h3>
         <h3><a href="submit.html">Redeem Points</a></h3>
-        `
+      `;
     });
 
     eventInput.addEventListener('input', () => {
@@ -50,22 +50,31 @@ auth.onAuthStateChanged(user => {
         return;
       }
 
-      const suggestions = getEventSuggestions(inputText);
-      eventSuggestions.innerHTML = suggestions.map(suggestion => {
-        if (Array.isArray(suggestion)) {
-          return `<div>${suggestion.join('')}</div>`;
-        } else {
-          return `<div>${suggestion}</div>`;
-        }
-      }).join('');
+      getEventSuggestions(inputText).then(suggestions => {
+        eventSuggestions.innerHTML = suggestions.map(suggestion => {
+          if (Array.isArray(suggestion)) {
+            return `<div>${suggestion.join('')}</div>`;
+          } else {
+            return `<div>${suggestion}</div>`;
+          }
+        }).join('');
+      });
     });
 
-    function getEventSuggestions(inputText) {
+    async function getEventSuggestions(inputText) {
       //get event list
-      var events = ['Soccer Game', 'Volleyball Game', 'Jazz Concert', 'Theatre Play', 'Softball Game'];
+      var eventList = ['Soccer Game', 'Volleyball Game', 'Jazz Concert', 'Theatre Play', 'Softball Game'];
 
-      return events.filter(event => event.toLowerCase().startsWith(inputText.toLowerCase()));
+      const querySnapshot = await firebase.firestore().collection('events').get();
+
+      querySnapshot.forEach((doc) => {
+        eventList.push(doc.data().eventName);
+      });
+
+      console.log(eventList);
+
+      return eventList.filter(eventName => eventName.toLowerCase().startsWith(inputText.toLowerCase()));
     }
 
   }
-})
+});
