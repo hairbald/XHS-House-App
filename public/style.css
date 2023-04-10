@@ -40,3 +40,11 @@ button {
     padding: 15px 32px;
     color: white;
 }
+
+input[type=text] {
+    width: 100%;
+    font-size: 16px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    border: none;
+    border-bottom: 2px solid black;
+}
