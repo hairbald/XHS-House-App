@@ -133,6 +133,8 @@ auth.onAuthStateChanged(user => {
                         break;
                 }
         });
+
+        //Add points to the house user belongs to
     
 
     } else {

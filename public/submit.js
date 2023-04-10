@@ -24,6 +24,8 @@ const navbar = document.getElementById('navbar');
 
 const eventInput = document.getElementById('eventInput');
 const eventSuggestions = document.getElementById('eventSuggestions');
+const eventListDiv = document.getElementById('eventListDiv');
+const eventList = document.getElementById('eventList');
 
 console.log("test");
 
@@ -65,6 +67,21 @@ auth.onAuthStateChanged(user => {
     }
     });
 
+    //List all events in collection
+    db.collection("events").get()
+      .then(querySnapshot => {
+        querySnapshot.forEach(doc => {
+          const event = doc.data();
+
+          const eventListItem = document.createElement('li');
+          eventListItem.innerHTML = `
+            ${event.eventName} (${event.points})
+          `;
+
+          eventList.appendChild(eventListItem);
+        });
+      });
+
     eventInput.addEventListener('input', () => {
       const inputText = eventInput.value.trim();
       if (inputText.length === 0) {
@@ -85,7 +102,7 @@ auth.onAuthStateChanged(user => {
 
     async function getEventSuggestions(inputText) {
       //get event list
-      var eventList = ['Soccer Game', 'Volleyball Game', 'Jazz Concert', 'Theatre Play', 'Softball Game'];
+      var eventList = [];
 
       const querySnapshot = await firebase.firestore().collection('events').get();
 
