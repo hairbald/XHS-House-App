@@ -76,5 +76,39 @@ auth.onAuthStateChanged(user => {
       return eventList.filter(eventName => eventName.toLowerCase().startsWith(inputText.toLowerCase()));
     }
 
+    document.getElementById('submit').addEventListener('click', (e) => {
+      e.preventDefault();
+
+      const eventName = document.getElementById('eventInput').value;
+      let pointsEarned;
+
+      //Retreive info on event entered
+      db.collection('events').where('eventName', '==', eventName)
+      .get()
+      .then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          pointsEarned = doc.data().points;
+        });
+
+        //add points to user
+        const userRef = db.collection("users").doc(user.uid);
+        userRef.update({
+          points: firebase.firestore.FieldValue.increment(pointsEarned)
+        })
+        .then(() => {
+          console.log(`Gave ${pointsEarned} points to ${user.uid}`);
+          //Reset form
+          document.getElementById("eventForm").reset();
+        })
+        .catch((error) => {
+          console.error("It no work (Adding points to user): ", error);
+        });
+      })
+      .catch((error) => {
+        console.error("It no work (Couldn't retrieve doc):", error);
+      });
+
+    });
+
   }
 });
