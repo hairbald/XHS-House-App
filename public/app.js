@@ -38,10 +38,36 @@ signOutBtn.onclick = () => auth.signOut();
 
 let house = "unknown";
 
+function calculateHousePoints() {
+    db.collection("users")
+        .get()
+        .then(querySnapshot => {
+            const housePoints = {
+                Red: 0,
+                Blue: 0,
+                Orange: 0,
+                Purple: 0,
+            };
+
+            querySnapshot.forEach(doc => {
+                const userHouse = doc.data().house;
+                const userPoints = doc.data().points;
+                housePoints[userHouse] += userPoints;
+            });
+
+            //Update points in house doc
+            Object.entries(housePoints).forEach(([houseName, points]) => {
+                db.collection("houses").doc(houseName).update({ points });
+            });
+        })
+        .catch(error => {
+            console.log(error);
+        });
+}
+
 auth.onAuthStateChanged(user => {
     if (user) {
-        //user variables
-        //var house = "";
+        calculateHousePoints();
 
         //signed in
         whenSignedIn.hidden = false;
@@ -132,10 +158,11 @@ auth.onAuthStateChanged(user => {
                         navbar.style.backgroundColor = "#F39C12";
                         break;
                 }
+
+                //Add points to house
+
         });
 
-        //Add points to the house user belongs to
-    
 
     } else {
         //not signed in
