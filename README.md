@@ -4,6 +4,7 @@
 
 <p align="center">Web app I'm writing for FBLA 2023 Coding and Programming</p>
 <br/>
+<p>Developed by Harry Baldwin</p>
 <p>Libraries used</p>
 <table>
   <tr>
