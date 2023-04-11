@@ -13,6 +13,10 @@
   </tr>
   <tr>
     <td>Firebase</td>
-    <td>Hosting and database</td>
+    <td>Hosting and user authentication with Google</td>
     <td>https://firebase.google.com</td>
   </tr>
+  <tr>
+    <td>Firestore</td>
+    <td>NoSQL cloud-based database</td>
+    <td>https://firebase.google.com/docs/firestore</td>
