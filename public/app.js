@@ -159,26 +159,7 @@ auth.onAuthStateChanged(user => {
 
             house = data.house;
 
-                switch (house) {
-                    case "Red":
-                        setColor("5px solid #C0392B");
-                        navbar.style.backgroundColor = "#E74C3C";
-                        break;
-                    case "Blue":
-                        setColor("5px solid #2980B9");
-                        navbar.style.backgroundColor = "#3498DB";
-                        break;
-                    case "Purple":
-                        setColor("5px solid #8E44AD");
-                        navbar.style.backgroundColor = "#9B59B6";
-                        break;
-                    case "Orange":
-                        setColor("5px solid #E67E22");
-                        navbar.style.backgroundColor = "#F39C12";
-                        break;
-                }
-
-                //Add points to house
+            setColor(house);
 
         });
 
@@ -192,6 +173,30 @@ auth.onAuthStateChanged(user => {
 });
 
 function setColor(color) {
-    flexContainer.style.border = color;
-    houseLeaderboard.style.border = color;
+   
+    flexContainer.borderRadius = "4px";
+
+    switch (color) {
+        case "Red":
+            flexContainer.style.border = "10px solid #C0392B";
+            flexContainer.style.borderRadius = "4px";
+            houseLeaderboard.style.border = "5px solid #C0392B";
+            navbar.style.backgroundColor = "#E74C3C";
+            break;
+        case "Blue":
+            flexContainer.style.border = "10px solid #2980B9";
+            houseLeaderboard.style.border = "5px solid #2980B9";
+            navbar.style.backgroundColor = "#3498DB";
+            break;
+        case "Purple":
+            flexContainer.style.border = "10px solid #8E44AD";
+            houseLeaderboard.style.border = "5px solid #8E44AD";
+            navbar.style.backgroundColor = "#9B59B6";
+            break;
+        case "Orange":
+            flexContainer.style.border = "10px solid #E67E22";
+            houseLeaderboard.style.border = "5px solid #E67E22";
+            navbar.style.backgroundColor = "#F39C12";
+            break;
+    }
 }
