@@ -65,9 +65,28 @@ function calculateHousePoints() {
         });
 }
 
+function updateHouseLeaderboard() {
+    db.collection("houses")
+        .get()
+        .then(querySnapshot => {
+            let leaderboardHTML = `<h3>House Leaderboard:</h3>`;
+
+            querySnapshot.forEach(doc => {
+                const houseName = doc.id;
+                const points = doc.data().points;
+                leaderboardHTML += `
+                    <div>${houseName}: ${points}</div>
+                    `;
+            });
+
+            houseLeaderboard.innerHTML = leaderboardHTML;
+        })
+}
+
 auth.onAuthStateChanged(user => {
     if (user) {
         calculateHousePoints();
+        updateHouseLeaderboard();
 
         //signed in
         whenSignedIn.hidden = false;
