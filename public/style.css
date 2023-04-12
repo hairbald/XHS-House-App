@@ -19,6 +19,13 @@ body
     border: 5px solid black;
 }
 
+.navbarParent {
+    display: flex;
+    justify-content: left;
+    gap: 10px;
+    border-radius: 4px;
+}
+
 .navbar {
     display:flex;
     justify-content: left;

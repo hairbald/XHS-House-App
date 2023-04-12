@@ -27,6 +27,7 @@ const addPointsBtn = document.getElementById('addPointsBtn');
 const userDetails = document.getElementById('userDetails');
 
 const navbar = document.getElementById('navbar');
+const navbarParent = document.getElementById('navbarParent');
 const flexContainer = document.getElementById('flexContainer');
 const houseLeaderboard = document.getElementById('houseLeaderboard');
 
@@ -181,21 +182,25 @@ function setColor(color) {
             flexContainer.style.border = "10px solid #C0392B";
             flexContainer.style.borderRadius = "4px";
             houseLeaderboard.style.border = "5px solid #C0392B";
+            navbarParent.style.backgroundColor = "#E74C3C";
             navbar.style.backgroundColor = "#E74C3C";
             break;
         case "Blue":
             flexContainer.style.border = "10px solid #2980B9";
             houseLeaderboard.style.border = "5px solid #2980B9";
+            navbarParent.style.backgroundColor = "#3498DB";
             navbar.style.backgroundColor = "#3498DB";
             break;
         case "Purple":
             flexContainer.style.border = "10px solid #8E44AD";
             houseLeaderboard.style.border = "5px solid #8E44AD";
+            navbarParent.style.backgroundColor = "#9B59B6";
             navbar.style.backgroundColor = "#9B59B6";
             break;
         case "Orange":
             flexContainer.style.border = "10px solid #E67E22";
             houseLeaderboard.style.border = "5px solid #E67E22";
+            navbarParent.style.backgroundColor = "F39C12";
             navbar.style.backgroundColor = "#F39C12";
             break;
     }
