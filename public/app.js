@@ -110,12 +110,14 @@ auth.onAuthStateChanged(user => {
                     if (!querySnapshot.empty) {
                         //Get the student's house
                         house = querySnapshot.docs[0].data().house;
+                        let role = querySnapshot.docs[0].data().role;
 
                         //set initial values
                         userRef.set({
                             house: house,
                             name: user.displayName,
-                            points: 80
+                            points: 80,
+                            role: role
                         })
                     }
                 })

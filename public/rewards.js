@@ -70,37 +70,86 @@ const firebaseConfig = {
 
       rewardsProgress.value = doc.data().points;
 
-      var prizesArray = [
-        {points: 100, prize: '1 free drink'},
-        {points: 200, prize: 'Casual Day'},
-        {points: 400, prize: '3 free drinks'},
-        {points: 800, prize: 'Prize 4'},
-        {points: 1600, prize: 'Prize 5'},
-        {points: 3200, prize: 'Prize 6'}
-      ];
+      var prizesArray = [];
 
-      const progressPercentage = (doc.data().points / 10000) * 100;
+      db.collection("rewards").get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+            prizesArray.push({
+                points: doc.data().points,
+                prize: doc.data().prize
+            });
+        });
+        console.log(prizesArray);
 
-      prizesArray.forEach(item => {
-        const percentage = (item.points / 10000) * 100;
+        const progressPercentage = (doc.data().points / 10000) * 100;
+  
+        let users = [];
 
-        const marker = document.createElement('div');
-        marker.classList.add('marker');
-        marker.style.left = `${percentage}%`;
-        markersDiv.appendChild(marker);
+        db.collection("users").get().then((querySnapshot) => {
+          querySnapshot.forEach((doc) => {
+            users.push({
+              name: doc.data().name,
+              points: doc.data().points
+            });
+          });
+        })
 
-        const prize = document.createElement('div');
-        prize.classList.add('prize');
-        prize.innerHTML = `${item.points} points: ${item.prize}`;
-        prize.style.left = `${percentage}%`;
-        markersDiv.appendChild(prize);
+        console.log(users);
+
+        prizesArray.forEach(item => {
+          const percentage = (item.points / 10000) * 100;
+  
+          const marker = document.createElement('div');
+          marker.classList.add('marker');
+          marker.style.left = `${percentage}%`;
+          markersDiv.appendChild(marker);
+  
+          const prize = document.createElement('div');
+          prize.classList.add('prize');
+          prize.innerHTML = `${item.points} points: ${item.prize}`;
+          prize.style.left = `${percentage}%`;
+          markersDiv.appendChild(prize);
+
+          if (data.role == "Principle") {
+          const winnerText = document.createElement('div');
+          winnerText.classList.add('winner-text');
+          prize.appendChild(winnerText);
+
+          const button = document.createElement('button');
+          button.classList.add('winner-button');
+          button.innerHTML = "Choose a Winner";
+          prize.appendChild(button);
+
+          button.addEventListener('click', () => {
+            const eligibleUsers = users.filter(user => user.points >= item.points);
+            const winnerIndex = Math.floor(Math.random() * eligibleUsers.length);
+            const winner = eligibleUsers[winnerIndex];
+
+            if (winner) {
+              winnerText.innerHTML = `Winner: ${winner.name}`;
+              console.log(winner.name);
+            } else {
+              winnerText.innerHTML = `No winner found.`;
+            }
+
+          });
+        }
+
       });
+      
+
+      
+      });
+      
 
       });
+      
   
       
       
   
     }
+    
   });
+  
   
