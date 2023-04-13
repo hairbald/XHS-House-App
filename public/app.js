@@ -30,6 +30,7 @@ const navbar = document.getElementById('navbar');
 const navbarParent = document.getElementById('navbarParent');
 const flexContainer = document.getElementById('flexContainer');
 const houseLeaderboard = document.getElementById('houseLeaderboard');
+const studentLeaderboard = document.getElementById('studentLeaderboard');
 
 const provider = new firebase.auth.GoogleAuthProvider();
 
@@ -84,10 +85,44 @@ function updateHouseLeaderboard() {
         })
 }
 
+function studentLeaderboardColorPicker(color) {
+    switch (color) {
+        case "Red":
+            return "#C0392B";
+            break;
+        case "Blue":
+            return "#2980B9";
+            break;
+        case "Purple":
+            return "#8E44AD";
+            break;
+        case "Orange":
+            return "#E67E22";
+            break;
+        
+    }
+}
+
 auth.onAuthStateChanged(user => {
     if (user) {
         calculateHousePoints();
         updateHouseLeaderboard();
+
+        const usersRef = db.collection("users");
+        const usersQuery = usersRef.orderBy('points', 'desc').limit(10);
+
+        usersQuery.get().then((querySnapshot) => {
+            let rank = 1;
+            querySnapshot.forEach((doc) => {
+                const user = doc.data();
+                const userDiv = document.createElement('div');
+                userDiv.style.fontSize = "medium";
+                userDiv.style.color = studentLeaderboardColorPicker(user.house);
+                userDiv.innerHTML = `${rank}. ${user.name} -${user.points}`;
+                studentLeaderboard.appendChild(userDiv);
+                rank++;
+            });
+        });
 
         //signed in
         whenSignedIn.hidden = false;

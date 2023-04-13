@@ -25,6 +25,7 @@ const firebaseConfig = {
   const rewardsProgress = document.getElementById('rewardsProgress');
   const markersDiv = document.getElementById('markers');
   const prizesDiv = document.getElementById('prizes');
+  const winnerMessage = document.getElementById('winnerMessage');
   
   console.log("test");
   
@@ -128,6 +129,9 @@ const firebaseConfig = {
             if (winner) {
               winnerText.innerHTML = `Winner: ${winner.name}`;
               console.log(winner.name);
+              winnerMessage.innerHTML = `
+                <h3>${winner.name} won ${item.prize}!</h3>
+              `;
             } else {
               winnerText.innerHTML = `No winner found.`;
             }
