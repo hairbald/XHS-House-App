@@ -42,7 +42,8 @@ auth.onAuthStateChanged(user => {
         <h3>Hi, ${user.displayName}!</h3>
         <h3>Points: ${data.points}</h3>
         <h3><a href="index.html">Home</a></h3>
-        <h3><a href="submit.html">Redeem Points</a></h3>
+        <h3><a href="submit.html">Events & Redeem Points</a></h3>
+        <h3><a href="rewards.html">Rewards</a></h3>
       `;
 
       house = data.house;

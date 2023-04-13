@@ -55,3 +55,23 @@ input[type=text] {
     border: none;
     border-bottom: 2px solid black;
 }
+
+#markers {
+    position: relative;
+    height: 20px;
+}
+
+.marker {
+    position: absolute;
+    width: 2px;
+    height: 10px;
+    top: 5px;
+    background-color: black;
+}
+
+.prize {
+    position: absolute;
+    font-size: 12px;
+    white-space: nowrap;
+    transform: translate(-50%, 20px);
+}
