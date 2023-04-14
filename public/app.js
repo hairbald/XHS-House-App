@@ -146,13 +146,15 @@ auth.onAuthStateChanged(user => {
                         //Get the student's house
                         house = querySnapshot.docs[0].data().house;
                         let role = querySnapshot.docs[0].data().role;
+                        let graduationYear = querySnapshot.docs[0].data().graduationYear;
 
                         //set initial values
                         userRef.set({
                             house: house,
                             name: user.displayName,
                             points: 80,
-                            role: role
+                            role: role,
+                            graduationYear: graduationYear
                         })
                     }
                 })

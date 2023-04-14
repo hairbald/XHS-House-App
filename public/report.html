@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Submit Points</title>
+    <title>Rewards & Progress</title>
 
     <link rel="stylesheet" href="style.css">
 </head>
@@ -13,28 +13,29 @@
     <div id="navbar" class="navbar"></div>
 
     <br/>
+
+    <h3>Report</h3>
+    <p>Graduation Year:</p>
     
-    <div id="formDiv">
-        <form id="eventForm">
-            <!-- <input id="eventInput" name="eventInput" type="text" placeholder="Search for activity..."> -->
-            <select name="events" id="eventInput">
-                
-            </select>
-            <div id="eventSuggestions"></div>
-            <button type="submit" id="submit">Submit</button>
-        </form>
-    </div>
-    <br/>
-    <div id="eventListDiv">
-        <h3>Events</h3>
-        <ul id="eventList"></ul>
-    </div>
+    <input type="radio" name="year" value="2023" checked id="2023">
+    <label for="2023">2023</label>
+
+    <input type="radio" name="year" value="2024" id="2024">
+    <label for="2024">2024</label>
+
+    <input type="radio" name="year" value="2025" id="2025">
+    <label for="2025">2025</label>
+
+    <input type="radio" name="year" value="2026" id="2026">
+    <label for="2026">2026</label>
+
+    <div id="report"></div>
 
     <!-- scripts -->
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
-    <script src="submit.js"></script>
+    <script src="report.js"></script>
 </body>
 </html>

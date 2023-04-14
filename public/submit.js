@@ -68,6 +68,19 @@ auth.onAuthStateChanged(user => {
     }
     });
 
+    //Add events to dropdown
+    db.collection("events").get().then((snapshot => {
+      snapshot.forEach((doc) => {
+        const eventName = doc.data().eventName;
+        const points = doc.data().points;
+
+        const option = document.createElement('option');
+        option.value = points;
+        option.textContent = eventName;
+        eventInput.appendChild(option);
+      })
+    }))
+
     //List all events in collection
     db.collection("events").get()
       .then(querySnapshot => {
@@ -120,7 +133,8 @@ auth.onAuthStateChanged(user => {
       e.preventDefault();
 
       const eventName = document.getElementById('eventInput').value;
-      let pointsEarned;
+      //let pointsEarned;
+      const pointsEarned = parseInt(document.getElementById('eventInput').selectedOptions[0].value);
 
       //Retreive info on event entered
       db.collection('events').where('eventName', '==', eventName)
