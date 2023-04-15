@@ -89,7 +89,7 @@ auth.onAuthStateChanged(user => {
 
           const eventListItem = document.createElement('li');
           eventListItem.innerHTML = `
-            ${event.eventName} (${event.points})
+            ${event.eventName} (${event.points} points)
           `;
 
           eventList.appendChild(eventListItem);

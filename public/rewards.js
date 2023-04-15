@@ -17,6 +17,9 @@ const firebaseConfig = {
   
   let unsubscribe;
   let house;
+
+  //For new prize form
+  var isSubmitting = false;
   
   const user = firebase.auth().currentUser
   
@@ -29,6 +32,7 @@ const firebaseConfig = {
   const newPrizeName = document.getElementById('newPrizeName');
   const newEventDiv = document.getElementById('newEventDiv');
   const pointsInputSlider = document.getElementById('pointInputSlider');
+  const submit = document.getElementById('submit');
   
   console.log("test");
   
@@ -114,7 +118,7 @@ const firebaseConfig = {
           prize.style.left = `${percentage}%`;
           markersDiv.appendChild(prize);
 
-          if (data.role == "Principle") {
+          if (data.role == "teacher") {
           newEventDiv.hidden = false;
           
             const winnerText = document.createElement('div');
@@ -142,6 +146,29 @@ const firebaseConfig = {
             }
 
           });
+
+          submit.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            if (isSubmitting) {
+              return;
+            }
+
+            var points = pointsInputSlider.value;
+            var prize = newPrizeName.value;
+
+            isSubmitting = true;
+
+            db.collection("rewards").add({
+              points: points,
+              prize: prize
+            })
+            .then(function() {
+              //reload page so reward shows up
+              location.reload();
+            })
+          })
+
         }
 
       });
@@ -161,4 +188,6 @@ const firebaseConfig = {
     
   });
   
-  
+  function onSliderChange(val) {
+    document.getElementById('output').innerHTML = val;
+  }
