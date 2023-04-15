@@ -26,12 +26,15 @@ const firebaseConfig = {
   const markersDiv = document.getElementById('markers');
   const prizesDiv = document.getElementById('prizes');
   const winnerMessage = document.getElementById('winnerMessage');
+  const newPrizeName = document.getElementById('newPrizeName');
+  const newEventDiv = document.getElementById('newEventDiv');
+  const pointsInputSlider = document.getElementById('pointInputSlider');
   
   console.log("test");
   
   auth.onAuthStateChanged(user => {
     if (user) {
-  
+
       const userRef = db.collection("users").doc(user.uid);
   
       unsubscribe = userRef.onSnapshot((doc) => {
@@ -112,7 +115,9 @@ const firebaseConfig = {
           markersDiv.appendChild(prize);
 
           if (data.role == "Principle") {
-          const winnerText = document.createElement('div');
+          newEventDiv.hidden = false;
+          
+            const winnerText = document.createElement('div');
           winnerText.classList.add('winner-text');
           prize.appendChild(winnerText);
 

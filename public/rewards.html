@@ -21,8 +21,13 @@
     <br/><br/><br/>
     <div id="winnerMessage"></div>
 
-    <div id="newEventDiv">
-        <input type="range" min="10" max="500" step="10" value="10">
+    <div id="newEventDiv" hidden="true">
+        <form id="newRewardForm">
+            <label for="pointInputSlider">Point Value:</label>
+            <input type="range" min="10" max="500" step="10" value="10" id="pointInputSlider">
+            <input type="text" id="newPrizeName" placeholder="Enter prize name...">
+            <button type="submit" id="submit">Submit</button>
+        </form>
     </div>
 
     <!-- scripts -->

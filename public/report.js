@@ -23,6 +23,7 @@ const firebaseConfig = {
   const navbar = document.getElementById('navbar');
   
   const yearButtons = document.querySelectorAll('input[name="year"]');
+  const reportDiv = document.getElementById('report');
   
   console.log("test");
   
@@ -63,32 +64,49 @@ const firebaseConfig = {
               navbar.style.backgroundColor = "#F39C12";
               break;
       }
+
+      //the report
+      document.getElementById('submit').addEventListener('click', (e) => {
+        e.preventDefault();
+
+        let users = [];
+        let sortedUsers = [];
+
+        db.collection("users").get().then((querySnapshot) => {
+          querySnapshot.forEach((doc) =>  {
+            const selectedYear = document.querySelector('input[name="year"]:checked').selected;
+            //if (doc.data().graduationYear == selectedYear) {
+            users.push({
+              name: doc.data().name,
+              points: doc.data().points,
+              graduationYear: doc.data().graduationYear
+            });
+            //console.log(users);
+
+            //console.log(document.querySelector('input[name="year"]:checked').selected);
+
+            console.log(users.filter(checkYear));
+
+          //}
+          });
+        })
+        
+
+
+      })
+
+
+
       });
   
-      //the report
-      yearButtons.forEach(button => {
-        button.addEventListener('change', () => {
-          updateReport(button.value);
-        });
-      });
-
-      updateReport(data.graduationYear);
+      
 
 
       
 
     }
   });
-  
-  function updateReport(graduationYear) {
-    db.collection("users")
-      .where('graduationYear', '==', graduationYear)
-      .get()
-      .then((querySnapshot) => {
-        let reportHTML = "";
-        querySnapshot.forEach((doc) => {
-          reportHTML += `<p>${doc.data().name}: ${doc.data().points} points</p>`;
-        });
-        report.innerHTML = reportHTML
-      })
+
+  function checkYear(sorted) {
+    return sorted == document.querySelector('input[name="year"]:checked').selected;
   }
