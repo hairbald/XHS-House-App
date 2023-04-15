@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rewards & Progress</title>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.debug.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -30,8 +30,10 @@
         <input type="radio" name="year" value="2026" id="2026">
         <label for="2026">2026</label>
         
-        <button type="submit" id="submit">Submit</button>
+        <button type="submit" id="submit">Generate Report</button>
     </form>
+
+    <button id="download-report">Download Report</button>
 
     <div id="report"></div>
 
@@ -40,6 +42,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-database.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-firestore.js"></script>
+    <!-- <script src="jspdf.umd.min.js"></script> -->
     <script src="report.js"></script>
 </body>
 </html>

@@ -17,6 +17,8 @@ const firebaseConfig = {
   
   let unsubscribe;
   let house;
+
+  let totalClassPoints;
   
   const user = firebase.auth().currentUser
   
@@ -24,6 +26,7 @@ const firebaseConfig = {
   
   const yearButtons = document.querySelectorAll('input[name="year"]');
   const reportDiv = document.getElementById('report');
+  const downloadReport = document.getElementById('download-report');
   
   console.log("test");
   
@@ -72,30 +75,58 @@ const firebaseConfig = {
         let users = [];
         let sortedUsers = [];
 
+        totalClassPoints = 0;
+
         db.collection("users").get().then((querySnapshot) => {
           querySnapshot.forEach((doc) =>  {
             const selectedYear = document.querySelector('input[name="year"]:checked').selected;
-            //if (doc.data().graduationYear == selectedYear) {
             users.push({
               name: doc.data().name,
               points: doc.data().points,
               graduationYear: doc.data().graduationYear
             });
-            //console.log(users);
 
-            //console.log(document.querySelector('input[name="year"]:checked').selected);
+            sortedUsers = users.filter(checkYear);
 
-            console.log(users.filter(checkYear));
-
-          //}
           });
-        })
+
+          console.log(sortedUsers);
+
+          reportDiv.innerHTML = "";
+
+          sortedUsers.forEach((user) => {
+            const userDiv = document.createElement('div');
+            userDiv.style.fontSize = "medium";
+            userDiv.innerHTML = `${user.name}  - ${user.points} points`;
+            reportDiv.appendChild(userDiv);
+
+            totalClassPoints += user.points;
+          });
+
+        });
         
 
 
-      })
+      });
+
+      //Generate PDF of report
+      downloadReport.addEventListener('click', () => {
+        let doc = new jsPDF();
 
 
+        const selectedYear = document.querySelector('input[name="year"]:checked').value;
+
+        doc.setFontSize(20);
+        doc.text(`Class of ${selectedYear} Report`, 15, 15);
+        
+        doc.setFontSize(11);
+        doc.text(`Total Class Points: ${totalClassPoints}`, 15, 30);
+
+        doc.fromHTML(reportDiv.innerHTML, 15, 45);
+
+        doc.save("report.pdf");
+
+      });
 
       });
   
@@ -108,5 +139,6 @@ const firebaseConfig = {
   });
 
   function checkYear(sorted) {
-    return sorted == document.querySelector('input[name="year"]:checked').selected;
+    const selectedYear = document.querySelector('input[name="year"]:checked').value;
+    return sorted.graduationYear == selectedYear;
   }
