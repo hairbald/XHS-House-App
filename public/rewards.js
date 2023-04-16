@@ -30,7 +30,7 @@ const firebaseConfig = {
   const prizesDiv = document.getElementById('prizes');
   const winnerMessage = document.getElementById('winnerMessage');
   const newPrizeName = document.getElementById('newPrizeName');
-  const newEventDiv = document.getElementById('newEventDiv');
+  const newRewardDiv = document.getElementById('newRewardDiv');
   const pointsInputSlider = document.getElementById('pointInputSlider');
   const submit = document.getElementById('submit');
   
@@ -122,7 +122,7 @@ const firebaseConfig = {
           markersDiv.appendChild(prize);
 
           if (data.role == "teacher") {
-          newEventDiv.hidden = false;
+          newRewardDiv.hidden = false;
           
             const winnerText = document.createElement('div');
           winnerText.classList.add('winner-text');
@@ -145,7 +145,7 @@ const firebaseConfig = {
                 <h3>${winner.name} won ${item.prize}!</h3>
               `;
             } else {
-              winnerText.innerHTML = `No winner found.`;
+              winnerText.innerHTML = `No eligible winners.`;
             }
 
           });

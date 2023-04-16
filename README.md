@@ -27,3 +27,13 @@
     <td>Uses JS to generate PDF documents</td>
     <td>https://github.com/parallax/jsPDF</td>
   </tr>
+</table>
+<br/>
+
+<div>
+  <h2>Logging In</h2>
+  <p>The <a href="https://xhs-house-app.web.app">home screen</a> has a button to sign in with Google. This will be used to retreieve credentials from your Google account such as your name, email address, and profile photo. You cannot proceed unless you sign in with your Google account.</p><br/>
+  <!-- image -->
+  <p>To access most of the entirety of the website you must be a registered user within the school. Accounts with teacher permissions can register users at the bottom of the home page if they are logged in and have the teacher role.</p>
+  <!-- image -->
+</div>

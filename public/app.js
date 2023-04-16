@@ -32,6 +32,13 @@ const studentLeaderboard = document.getElementById('studentLeaderboard');
 
 const notAddedIndicator = document.getElementById('notAddedIndicator');
 
+const newUserDiv = document.getElementById('add-new-user-div');
+const newUserForm = document.getElementById('new-user-form');
+const nameInput = document.getElementById('name-input');
+const houseSelect = document.getElementById('house-select');
+const yearSelect = document.getElementById('year-select');
+const submitBtn = document.getElementById('submit');
+
 const provider = new firebase.auth.GoogleAuthProvider();
 
 signInBtn.onclick = () => auth.signInWithPopup(provider);
@@ -156,7 +163,7 @@ auth.onAuthStateChanged(user => {
                         userRef.set({
                             house: house,
                             name: user.displayName,
-                            points: 80,
+                            points: 0,
                             role: role,
                             graduationYear: graduationYear
                         })
@@ -184,9 +191,37 @@ auth.onAuthStateChanged(user => {
                 <h3><a href="leaderboard.html">Leaderboard</a></h3>
                 `;
 
+            //Show teacher-exclusive UI
             if (data.role == "teacher") {
                 navbar.innerHTML += `<h3><a href="report.html">Generate a Report</a></h3>`
+                newUserDiv.hidden = false;
             }
+
+            //Teacher-exclusive functions
+
+            //New register user
+            submitBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+
+                const name = nameInput.value;
+                const graduationYear = yearSelect.value;
+                const house = houseSelect.value;
+
+                //Add new user/student
+                const db = firebase.firestore();
+                db.collection("students").add({
+                    name: name,
+                    house: house,
+                    graduationYear: graduationYear,
+                    role: "none"
+                })
+
+                alert(`${name} has been successfully registered!`);
+
+                newUserForm.reset();
+
+            })
+
 
 
             house = data.house;
