@@ -44,6 +44,7 @@ auth.onAuthStateChanged(user => {
         <h3><a href="index.html">Home</a></h3>
         <h3><a href="submit.html">Events & Redeem Points</a></h3>
         <h3><a href="rewards.html">Rewards</a></h3>
+        <h3><a href="leaderboard.html">Leaderboard</a></h3>
       `;
 
       if (data.role == "teacher") {

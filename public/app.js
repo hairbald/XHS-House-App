@@ -22,9 +22,7 @@ const whenSignedOut = document.getElementById('whenSignedOut');
 
 const signInBtn = document.getElementById('signInBtn');
 const signOutBtn = document.getElementById('signOutBtn');
-const addPointsBtn = document.getElementById('addPointsBtn');
 
-const userDetails = document.getElementById('userDetails');
 
 const navbar = document.getElementById('navbar');
 const navbarParent = document.getElementById('navbarParent');
@@ -123,12 +121,15 @@ auth.onAuthStateChanged(user => {
                 studentLeaderboard.appendChild(userDiv);
                 rank++;
             });
+            const fullLeaderboardDiv = document.createElement('div');
+            fullLeaderboardDiv.style.fontSize = "medium";
+            fullLeaderboardDiv.innerHTML = '<a href="leaderboard.html">View full leaderboard</a>';
+            studentLeaderboard.appendChild(fullLeaderboardDiv);
         });
 
         //signed in
         whenSignedIn.hidden = false;
         whenSignedOut.hidden = true;
-        //userDetails.innerHTML = `<h3>Hi, ${user.displayName}!</h3> <p>User ID: ${user.uid}</p>`;
 
         
 
@@ -168,26 +169,8 @@ auth.onAuthStateChanged(user => {
             }
         })
 
-        addPointsBtn.onclick = () => 
-            userRef.update({
-                points: firebase.firestore.FieldValue.increment(10)
-            })
-            .then(() => {
-                console.log("Points updated successfully!");
-            })
-            .catch((error) => {
-                console.error("Error updating points: ", error);
-            });
-
-        //Display user info in userInfo <ul>
         unsubscribe = userRef.onSnapshot((doc) => {
             var data = doc.data();
-
-            userInfo.innerHTML = `
-                <li>House: ${data.house}</li>
-                <li>Name: ${data.name}</li>
-                <li>Points: ${data.points}</li>
-                `; 
 
             navbar.innerHTML = `
                 <img id="userPhoto" src="${user.photoURL}" alt="Profile Photo" width="48" height="48">
@@ -196,6 +179,7 @@ auth.onAuthStateChanged(user => {
                 <h3><a href="index.html">Home</a></h3>
                 <h3><a href="submit.html">Events & Redeem Points</a></h3>
                 <h3><a href="rewards.html">Rewards</a></h3>
+                <h3><a href="leaderboard.html">Leaderboard</a></h3>
                 `;
 
             if (data.role == "teacher") {
@@ -214,7 +198,6 @@ auth.onAuthStateChanged(user => {
         //not signed in
         whenSignedIn.hidden = true;
         whenSignedOut.hidden = false;
-        userDetails.innerHTML = '';
     }
 });
 
