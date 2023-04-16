@@ -30,6 +30,8 @@ const flexContainer = document.getElementById('flexContainer');
 const houseLeaderboard = document.getElementById('houseLeaderboard');
 const studentLeaderboard = document.getElementById('studentLeaderboard');
 
+const notAddedIndicator = document.getElementById('notAddedIndicator');
+
 const provider = new firebase.auth.GoogleAuthProvider();
 
 signInBtn.onclick = () => auth.signInWithPopup(provider);
@@ -190,6 +192,12 @@ auth.onAuthStateChanged(user => {
             house = data.house;
 
             setColor(house);
+
+            if (house == "unknown") {
+                notAddedIndicator.hidden = false;
+            } else {
+                notAddedIndicator.hidden = true;
+            }
 
         });
 
