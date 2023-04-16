@@ -60,6 +60,10 @@ const firebaseConfig = {
           <h3><a href="submit.html">Events & Redeem Points</a></h3>
           <h3><a href="rewards.html">Rewards</a></h3>
         `;
+
+        if (data.role == "teacher") {
+            navbar.innerHTML += `<h3><a href="report.html">Generate a Report</a></h3>`
+        }
   
         house = data.house;
   

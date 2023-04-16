@@ -8,9 +8,8 @@
     ],
     "rewrites": [
       {
-        "source": "**/*.html",
-        "destination": "/$1",
-        "regex": "(.*)\\.html"
+        "source": "**",
+        "destination": "/index.html"
       }
     ]
   },

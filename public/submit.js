@@ -46,6 +46,10 @@ auth.onAuthStateChanged(user => {
         <h3><a href="rewards.html">Rewards</a></h3>
       `;
 
+      if (data.role == "teacher") {
+        navbar.innerHTML += `<h3><a href="report.html">Generate a Report</a></h3>`
+    }
+
       house = data.house;
 
       switch (house) {
