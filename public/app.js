@@ -271,7 +271,7 @@ function setColor(color) {
         case "Orange":
             flexContainer.style.border = "10px solid #E67E22";
             houseLeaderboard.style.border = "5px solid #E67E22";
-            navbarParent.style.backgroundColor = "F39C12";
+            navbarParent.style.backgroundColor = "#F39C12";
             navbar.style.backgroundColor = "#F39C12";
             break;
     }
