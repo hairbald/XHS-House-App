@@ -20,7 +20,7 @@
             <select name="events" id="eventInput">
                 
             </select>
-            <div id="eventSuggestions"></div>
+            <div id="eventSuggestions"></div><br/>
             <button type="submit" id="submit">Submit</button>
         </form>
     </div>
@@ -28,6 +28,18 @@
     <div id="eventListDiv">
         <h3>Events</h3>
         <ul id="eventList"></ul>
+    </div>
+
+    <div id="new-event-div" hidden="true">
+        <h3>Add New Event</h3>
+            <form id="new-event-form">
+                <label for="point-input-slider">Point Value</label>
+                <input type="range" min="10" max="200" step="10" value="10" style="width: 25%" oninput="onSliderChange(this.value)" id="point-input-slider">
+                <output id="output">10</output><br/>
+                <label for="event-name-input">Name</label>
+                <input type="text" id="event-name-input" placeholder="Enter event name..." style="width: 30%"><br/><br/>
+                <button type="submit" id="submit-event">Submit</button>
+            </form>
     </div>
 
     <!-- scripts -->

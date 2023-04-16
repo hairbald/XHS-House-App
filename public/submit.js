@@ -18,6 +18,9 @@ const db = firebase.firestore();
 let unsubscribe;
 let house;
 
+//For new event form
+let isSubmitting = false;
+
 const user = firebase.auth().currentUser
 
 const navbar = document.getElementById('navbar');
@@ -26,6 +29,11 @@ const eventInput = document.getElementById('eventInput');
 const eventSuggestions = document.getElementById('eventSuggestions');
 const eventListDiv = document.getElementById('eventListDiv');
 const eventList = document.getElementById('eventList');
+
+const newEventDiv = document.getElementById('new-event-div');
+const pointInputSlider = document.getElementById('point-input-slider');
+const eventNameInput = document.getElementById('event-name-input');
+const submitEventBtn = document.getElementById('submit-event');
 
 console.log("test");
 
@@ -49,6 +57,7 @@ auth.onAuthStateChanged(user => {
 
       if (data.role == "teacher") {
         navbar.innerHTML += `<h3><a href="report.html">Generate a Report</a></h3>`
+        newEventDiv.hidden = false;
     }
 
       house = data.house;
@@ -169,5 +178,36 @@ auth.onAuthStateChanged(user => {
 
     });
 
+    //Create new event functionality
+    submitEventBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+
+      console.log("ijwefijofewjofjoweofjie");
+
+      if (isSubmitting) {
+        return;
+      }
+
+      var points = pointInputSlider.value;
+      var eventName = eventNameInput.value;
+
+      isSubmitting = true;
+
+      console.log(db);
+
+      db.collection("events").add({
+        points: points,
+        eventName: eventName
+      })
+      .then(function() {
+        //reload page so reward shows up
+        location.reload();
+      })
+    })
+
   }
 });
+
+function onSliderChange(val) {
+  document.getElementById('output').innerHTML = val;
+}
