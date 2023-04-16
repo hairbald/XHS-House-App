@@ -21,3 +21,9 @@
     <td>Firestore</td>
     <td>NoSQL cloud-based database</td>
     <td>https://firebase.google.com/docs/firestore</td>
+  </tr>
+  <tr>
+    <td>jsPDF</td>
+    <td>Uses JS to generate PDF documents</td>
+    <td>https://github.com/parallax/jsPDF</td>
+  </tr>
