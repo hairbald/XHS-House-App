@@ -118,6 +118,7 @@ auth.onAuthStateChanged(user => {
                 const userDiv = document.createElement('div');
                 userDiv.style.fontSize = "medium";
                 userDiv.style.color = studentLeaderboardColorPicker(user.house);
+                userDiv.style.lineHeight = "25px";
                 userDiv.innerHTML = `${rank}. ${user.name} - ${user.points}`;
                 studentLeaderboard.appendChild(userDiv);
                 rank++;

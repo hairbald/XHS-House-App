@@ -74,8 +74,6 @@ const firebaseConfig = {
               break;
       }
 
-      //const progressPercentage = (doc.data().points / 10000) * 100;
-
       rewardsProgress.value = doc.data().points;
 
       var prizesArray = [];
@@ -89,7 +87,7 @@ const firebaseConfig = {
         });
         console.log(prizesArray);
 
-        const progressPercentage = (doc.data().points / 10000) * 100;
+        const progressPercentage = (doc.data().points / 5000) * 100;
   
         let users = [];
 
@@ -105,7 +103,7 @@ const firebaseConfig = {
         console.log(users);
 
         prizesArray.forEach(item => {
-          const percentage = (item.points / 10000) * 100;
+          const percentage = (item.points / 5000) * 100;
   
           const marker = document.createElement('div');
           marker.classList.add('marker');
