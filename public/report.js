@@ -19,6 +19,8 @@ const firebaseConfig = {
   let house;
 
   let totalClassPoints;
+  let numInClass;
+  let sortedUsers;
   
   const user = firebase.auth().currentUser
   
@@ -73,9 +75,10 @@ const firebaseConfig = {
         e.preventDefault();
 
         let users = [];
-        let sortedUsers = [];
+        sortedUsers = [];
 
         totalClassPoints = 0;
+        numInClass = 0;
 
         db.collection("users").get().then((querySnapshot) => {
           querySnapshot.forEach((doc) =>  {
@@ -101,6 +104,7 @@ const firebaseConfig = {
             reportDiv.appendChild(userDiv);
 
             totalClassPoints += user.points;
+            numInClass++;
           });
 
         });
@@ -120,9 +124,16 @@ const firebaseConfig = {
         doc.text(`Class of ${selectedYear} Report`, 15, 15);
         
         doc.setFontSize(11);
-        doc.text(`Total Class Points: ${totalClassPoints}`, 15, 30);
+        doc.text(`Class total: ${totalClassPoints} points`, 15, 30);
+        doc.text(`Class average: ${totalClassPoints / numInClass} points`, 15, 35)
 
-        doc.fromHTML(reportDiv.innerHTML, 15, 45);
+        const mostPointsUser = sortedUsers.sort((a, b) => b.points - a.points)[0];
+        doc.text(`Most points: ${mostPointsUser.name} - ${mostPointsUser.points} points`, 15, 40);
+
+        sortedUsers.sort((a, b) => a.points - b.points);
+        doc.text(`Least points: ${sortedUsers[0].name} - ${sortedUsers[0].points} points`, 15, 45);
+
+        doc.fromHTML(reportDiv.innerHTML, 15, 60);
 
         doc.save("report.pdf");
 
