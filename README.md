@@ -68,6 +68,7 @@
   <img src="public/images/documentation/new-reward.png"><br/>
 
   <h2>Leaderboard</h2>
-  <img src="public/images/documentation/leaderboard.png>
+  <img src="public/images/documentation/leaderboard.png"><br/>
+  The leaderboard ranks every user registered by their point count (greatest to least) and indicates what house they belong to by the color.
 
 </div>
