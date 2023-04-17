@@ -48,9 +48,20 @@
   <p>The events page shows every event that you can get points for and how many points they are worth, shown in a list under the "Events" header.</p><br/>
   <h3>Redeem Points</h3>
   <img src="public/images/documentation/event-dropdown.png"><br/>
-  <p>To redeem points for an event you attended, click on the dropdown menu, select the event that you attended, and click on the "Submit" button. You should notice a change in your amount of points in your navbar right after!</p>
+  <p>To redeem points for an event you attended, click on the dropdown menu, select the event that you attended, and click on the "Submit" button. You should notice a change in your amount of points in your navbar right after!</p><br/>
   <h3>Adding New Events</h3>
-  <img src="public/images/documentation/event-add.png"><br/>
+  <img src="public/images/documentation/event-add.png">
   <p>For teachers, there is a section under the event list for adding new events. To add a new event, use the slider to set the amount of points it will be worth for students redeeming it, and the name of the event that will show up in the list and dropdown menu.</p>
+
+  <h2>Rewards</h2>
+  <img src="public/images/documentation/rewards.png"><br/>
+  <p>The reward page shows your points visualized on a progress bar, which is out of 5000 points. Rewards/prizes are marked under the progress bar with how many points you need to be eligible to win that prize.<br/>
+  </br>Prizes are NOT automatically not given to if you obtain the amount of points for a prize, but rather you are thrown into a pool of every student who has reached that threshold, and will be randomly chosen to receive the prize. (Read further to see <a href="">how winners are chosen</a>).</p><br/>
+  <h3>How to Chose a Winner</h3>
+  <p>For teachers, under each prize under the progress bar will be a button to choose a winner for that prize.</p><br/>
+  <img src="public/images/documentation/reward-winner.png"><br/>
+  <p>Clicking the "Choose a Winner" button under the desired prize you would like to draw a winner for winner randomly choose a student who was got the necessary points for that prize. It will show the winner under the prize, and also below in larger text.<br/>
+  <br/>If there are no students who have reach the required amount of points for the prize, you will be greeted with the message in place of the winner text: "No eligible winner".<br/>
+  <img src="public/images/documentation/rewards-no-winner.png"><br/>
 
 </div>
