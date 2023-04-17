@@ -56,12 +56,13 @@
   <h2>Rewards</h2>
   <img src="public/images/documentation/rewards.png"><br/>
   <p>The reward page shows your points visualized on a progress bar, which is out of 5000 points. Rewards/prizes are marked under the progress bar with how many points you need to be eligible to win that prize.<br/>
-  </br>Prizes are NOT automatically not given to if you obtain the amount of points for a prize, but rather you are thrown into a pool of every student who has reached that threshold, and will be randomly chosen to receive the prize. (Read further to see <a href="">how winners are chosen</a>).</p><br/>
-  <h3>How to Chose a Winner</h3>
+  </br>Prizes are NOT automatically not given to if you obtain the amount of points for a prize, but rather you are thrown into a pool of every student who has reached that threshold, and will be randomly chosen to receive the prize. (Read further to see <a href="#how-to-choose-a-winner">how winners are chosen</a>).</p><br/>
+  <h3>How to Choose a Winner</h3>
   <p>For teachers, under each prize under the progress bar will be a button to choose a winner for that prize.</p><br/>
   <img src="public/images/documentation/reward-winner.png"><br/>
   <p>Clicking the "Choose a Winner" button under the desired prize you would like to draw a winner for winner randomly choose a student who was got the necessary points for that prize. It will show the winner under the prize, and also below in larger text.<br/>
   <br/>If there are no students who have reach the required amount of points for the prize, you will be greeted with the message in place of the winner text: "No eligible winner".<br/>
   <img src="public/images/documentation/rewards-no-winner.png"><br/>
+  <h3>Add New Reward</h3>
 
 </div>
