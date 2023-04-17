@@ -68,6 +68,6 @@
   <img src="public/images/documentation/new-reward.png"><br/>
 
   <h2>Leaderboard</h2>
-  <img src="public/images/documentation/new-reward.png>
+  <img src="public/images/documentation/leaderboard.png>
 
 </div>
