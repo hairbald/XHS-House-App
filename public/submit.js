@@ -166,6 +166,7 @@ auth.onAuthStateChanged(user => {
         .then(() => {
           console.log(`Gave ${pointsEarned} points to ${user.uid}`);
           //Reset form
+          alert(`You have redeemed ${eventName} points!`)
           document.getElementById("eventForm").reset();
         })
         .catch((error) => {

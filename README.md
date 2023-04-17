@@ -61,8 +61,13 @@
   <p>For teachers, under each prize under the progress bar will be a button to choose a winner for that prize.</p><br/>
   <img src="public/images/documentation/reward-winner.png"><br/>
   <p>Clicking the "Choose a Winner" button under the desired prize you would like to draw a winner for winner randomly choose a student who was got the necessary points for that prize. It will show the winner under the prize, and also below in larger text.<br/>
-  <br/>If there are no students who have reach the required amount of points for the prize, you will be greeted with the message in place of the winner text: "No eligible winner".<br/>
+  <br/>If there are no students who have reach the required amount of points for the prize, you will be greeted with the message in place of the winner text: "No eligible winners".<br/>
   <img src="public/images/documentation/rewards-no-winner.png"><br/>
   <h3>Add New Reward</h3>
+  <p>Teachers can add rewards to the progress bar by looking at the bottom of the page. There is a slider to choose the amount of points should be required for a user to be eligible to win the prize. Input the name of the prize in the name text box. Click the submit button to add it to the database of rewards.</p><br/>
+  <img src="public/images/documentation/new-reward.png"><br/>
+
+  <h2>Leaderboard</h2>
+  <img src="public/images/documentation/new-reward.png>
 
 </div>
