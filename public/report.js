@@ -122,23 +122,48 @@ const firebaseConfig = {
       downloadReport.addEventListener('click', () => {
         let doc = new jsPDF();
 
+        var line = 15;
 
         const selectedYear = document.querySelector('input[name="year"]:checked').value;
 
         doc.setFontSize(20);
-        doc.text(`Class of ${selectedYear} Report`, 15, 15);
+        doc.text(`Class of ${selectedYear} Report`, 15, line);
+        line += 15;
         
         doc.setFontSize(11);
-        doc.text(`Class total: ${totalClassPoints} points`, 15, 30);
-        doc.text(`Class average: ${totalClassPoints / numInClass} points`, 15, 35)
 
-        const mostPointsUser = sortedUsers.sort((a, b) => b.points - a.points)[0];
-        doc.text(`Most points: ${mostPointsUser.name} - ${mostPointsUser.points} points`, 15, 40);
+        if (document.getElementById('total-checkbox').checked) {
+          doc.text(`Class total: ${totalClassPoints} points`, 15, line);
+          line += 5;
+        }
 
-        sortedUsers.sort((a, b) => a.points - b.points);
-        doc.text(`Least points: ${sortedUsers[0].name} - ${sortedUsers[0].points} points`, 15, 45);
+        if (document.getElementById('average-checkbox').checked) {
+          doc.text(`Class average: ${totalClassPoints / numInClass} points`, 15, line)
+          line += 5;
+        }
 
-        doc.fromHTML(reportDiv.innerHTML, 15, 60);
+        if (document.getElementById('highest-checkbox').checked) {
+          const mostPointsUser = sortedUsers.sort((a, b) => b.points - a.points)[0];
+          doc.text(`Most points: ${mostPointsUser.name} - ${mostPointsUser.points} points`, 15, line);
+          line += 5;
+        }
+
+        if (document.getElementById('lowest-checkbox').checked) {
+          sortedUsers.sort((a, b) => a.points - b.points);
+          doc.text(`Least points: ${sortedUsers[0].name} - ${sortedUsers[0].points} points`, 15, line);
+          line += 5;
+        }
+
+        line += 5;
+
+        const notes = document.getElementById('note-input').value;
+
+        doc.text(`Notes: \n${notes}`, 15, line);
+        line += 5;
+
+        line += 10
+
+        doc.fromHTML(reportDiv.innerHTML, 15, line);
 
         doc.save("report.pdf");
 

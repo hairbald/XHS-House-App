@@ -33,9 +33,32 @@
         <button type="submit" id="submit">Generate Report</button>
     </form>
 
-    <button id="download-report">Download Report</button>
+    <div id="report"></div><br/>
 
-    <div id="report"></div>
+    <div id="custom-pdf-div">
+        <form id="custom-pdf-form">
+            <input type="checkbox" id="total-checkbox" value="Total">
+            <label for="total-checkbox">Show cumulative class points</label><br/>
+
+            <input type="checkbox" id="average-checkbox" value="Average">
+            <label for="average-checkbox">Show class points average</label><br/>
+
+            <input type="checkbox" id="highest-checkbox" value="Highest">
+            <label for="highest-checkbox">Highest points in class</label><br/>
+
+            <input type="checkbox" id="lowest-checkbox" value="Lowest">
+            <label for="lowest-checkbox">Lowest points in class</label><br/><br/>
+
+            <label for="note-input">Notes</label><br/>
+            <textarea id="note-input" name="note-input" rows="4" cols="50"></textarea><br>
+
+        </form>
+
+        <button id="download-report">Download Report</button>
+
+    </div>
+
+    
 
     <!-- scripts -->
     <script src="https://www.gstatic.com/firebasejs/8.2.1/firebase-app.js"></script>
