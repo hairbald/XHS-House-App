@@ -19,14 +19,19 @@
     <div id="markers"></div>
     <div id="prizes"></div>
     <br/><br/><br/>
-    <div id="winnerMessage"></div>
+    <div id="winnerMessage"></div><br/>
+
+    <div id="rewardDescription">
+        <p>Winners for a prize are randomly selected from every user that meets the requirements.</p>
+    </div><br/>
 
     <div id="newRewardDiv" hidden="true">
+        <h3>Add New Reward</h3>
         <form id="newRewardForm">
             <label for="pointInputSlider">Point Value:</label>
             <output id="output">10</output>
             <input type="range" min="10" max="5000" step="10" value="10" style="width: 100%"oninput="onSliderChange(this.value)" id="pointInputSlider">
-            <input type="text" id="newPrizeName" placeholder="Enter prize name...">
+            <input type="text" id="newPrizeName" placeholder="Enter prize name..."><br/><br>
             <button type="submit" id="submit">Submit</button>
         </form>
     </div>
