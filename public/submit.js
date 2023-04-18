@@ -25,7 +25,7 @@ const user = firebase.auth().currentUser
 
 const navbar = document.getElementById('navbar');
 
-const eventInput = document.getElementById('eventInput');
+//const eventInput = document.getElementById('eventInput');
 const eventSuggestions = document.getElementById('eventSuggestions');
 const eventListDiv = document.getElementById('eventListDiv');
 const eventList = document.getElementById('eventList');
@@ -82,8 +82,8 @@ auth.onAuthStateChanged(user => {
     }
     });
 
-    //Add events to dropdown
-    db.collection("events").get().then((snapshot => {
+    //Add events to dropdown (obsolete)
+    /*db.collection("events").get().then((snapshot => {
       snapshot.forEach((doc) => {
         const eventName = doc.data().eventName;
         const points = doc.data().points;
@@ -93,7 +93,7 @@ auth.onAuthStateChanged(user => {
         option.textContent = eventName;
         eventInput.appendChild(option);
       })
-    }))
+    }))*/
 
     //List all events in collection
     db.collection("events").get()
@@ -110,7 +110,7 @@ auth.onAuthStateChanged(user => {
         });
       });
 
-    eventInput.addEventListener('input', () => {
+    /*eventInput.addEventListener('input', () => {
       const inputText = eventInput.value.trim();
       if (inputText.length === 0) {
         eventSuggestions.innerHTML = '';
@@ -126,7 +126,7 @@ auth.onAuthStateChanged(user => {
           }
         }).join('');
       });
-    });
+    });*/
 
     async function getEventSuggestions(inputText) {
       //get event list
@@ -146,9 +146,35 @@ auth.onAuthStateChanged(user => {
     document.getElementById('submit').addEventListener('click', (e) => {
       e.preventDefault();
 
-      const eventName = document.getElementById('eventInput').value;
+      //const eventName = document.getElementById('eventInput').value; (obselete method)
       //let pointsEarned;
-      const pointsEarned = parseInt(document.getElementById('eventInput').selectedOptions[0].value);
+      //const pointsEarned = parseInt(document.getElementById('eventInput').selectedOptions[0].value);
+
+      const ticketID = document.getElementById('ticket-input').value;
+      
+      //Lookup ID
+      db.collection("tickets").where('ticketID', '==', ticketID).get()
+        .then((querySnapshot) => {
+          //Ticket does not exist
+          if (querySnapshot.empty) {
+            console.log("Ticket not found");
+            alert("Ticket does not exist.");
+          } else {
+            const ticketDoc = querySnapshot.docs[0];
+
+            const eventName = ticketDoc.data().eventName;
+            const points = ticketDoc.data().points;
+            
+            //Update user points
+            const userRef = db.collection("users").doc(user.uid);
+            userRef.update({
+              points: firebase.firestore.FieldValue.increment(points)
+            })
+            .then(() => {
+              alert(`You have successfully redeemed ${points} points!`);
+            })
+          }
+        })
 
       //Retreive info on event entered
       db.collection('events').where('eventName', '==', eventName)
@@ -180,7 +206,7 @@ auth.onAuthStateChanged(user => {
     });
 
     //Create new event functionality
-    submitEventBtn.addEventListener('click', function(e) {
+    /*submitEventBtn.addEventListener('click', function(e) {
       e.preventDefault();
 
       console.log("ijwefijofewjofjoweofjie");
@@ -204,6 +230,47 @@ auth.onAuthStateChanged(user => {
         //reload page so reward shows up
         location.reload();
       })
+    })*/
+
+    //New create event functionality with ticket
+    submitEventBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+
+      console.log("Yo the button was clicked");
+
+      if (isSubmitting) {
+        return;
+      }
+
+      var points = pointInputSlider.value;
+      var eventName = eventNameInput.value;
+      var ticketID = generateID();
+
+      isSubmitting = true;
+
+      console.log(generateID());
+
+      //Add to ticket collection
+      db.collection("tickets").add({
+        points: points,
+        eventname: eventName,
+        ticketID: ticketID
+      })
+
+      //Add to event collection
+      db.collection("events").add({
+        points: points,
+        eventName: eventName
+      })
+      .then(function() {
+        //Reload the page so the event shows up & show comfirmation alert box
+        alert(`
+        ${eventName} (${points}) has been registered as a new event!\n
+        Ticket ID: ${ticketID}
+        `);
+        location.reload();
+      })
+
     })
 
   }
@@ -211,4 +278,17 @@ auth.onAuthStateChanged(user => {
 
 function onSliderChange(val) {
   document.getElementById('output').innerHTML = val;
+}
+
+function generateID() {
+  let result = "";
+  const characters = 'ABCDEFabcdef0123456789';
+  var length = 4;
+  let count = 0;
+  while (count < length) {
+    result += characters.charAt(Math.floor(Math.random() * characters.length));
+    count++;
+  }
+
+  return result;
 }
